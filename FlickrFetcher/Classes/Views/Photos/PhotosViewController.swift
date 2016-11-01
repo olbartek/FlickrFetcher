@@ -22,6 +22,7 @@ class PhotosViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     var apiManager: APIManagerType {
         let urlBuilder = URLBuilder()
@@ -31,7 +32,11 @@ class PhotosViewController: UIViewController {
     lazy var photoDownloader: PhotoDownloader = {
         return PhotoDownloader(collectionView: self.collectionView)
     }()
-    var photos = [Photo]()
+    var photos = [Photo]() {
+        didSet {
+            photoDownloader.set(photos: self.photos)
+        }
+    }
     
     // MARK: VC's Lifecycle
     
@@ -47,8 +52,10 @@ class PhotosViewController: UIViewController {
             switch result {
             case .Error(error: let error):
                 print(error)
-            case .Success(result: let photos):
-                self.photos = photos.map { Photo(url: $0.standardPhotoUrl) }
+            case .Success(result: let apiPhotos):
+                let photos = apiPhotos.map { Photo(url: $0.standardPhotoUrl) }
+                self.photos = photos
+                self.spinner.stopAnimating()
                 self.collectionView.reloadData()
             }
         }
@@ -65,7 +72,9 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         switch photo.state {
         case .new:
             cell.spinner.startAnimating()
-            photoDownloader.startDownload(photo: photo, forIndexPath: indexPath)
+            if (!collectionView.isDragging && !collectionView.isDecelerating) {
+                photoDownloader.startDownload(photo: photo, forIndexPath: indexPath)
+            }
         case .downloaded:
             cell.spinner.stopAnimating()
         case .failed:
@@ -87,5 +96,22 @@ extension PhotosViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let tag = searchBar.text else { return }
         searchPhotos(withTag: tag)
+        spinner.startAnimating()
+    }
+}
+
+extension PhotosViewController: UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        photoDownloader.suspendAllOperations()
+    }
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            photoDownloader.loadPhotosForOnscreenCells()
+            photoDownloader.resumeAllOperations()
+        }
+    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        photoDownloader.loadPhotosForOnscreenCells()
+        photoDownloader.resumeAllOperations()
     }
 }

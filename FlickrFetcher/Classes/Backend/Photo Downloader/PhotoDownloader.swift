@@ -17,16 +17,21 @@ class PhotoDownloader {
     private lazy var downloadQueue: OperationQueue = {
         var queue = OperationQueue()
         queue.name = "Download queue"
-        queue.maxConcurrentOperationCount = 1
+        //queue.maxConcurrentOperationCount = 1
         return queue
     }()
     
     weak var collectionView: UICollectionView?
+    private var photos = [Photo]()
     
     // MARK: Initialization
     
     init(collectionView: UICollectionView) {
         self.collectionView = collectionView
+    }
+    
+    func set(photos: [Photo]) {
+        self.photos = photos
     }
     
     // MARK: Download Operations
@@ -52,10 +57,40 @@ class PhotoDownloader {
         downloadQueue.addOperation(photoDownloadOperation)
     }
     
-    // MARK: Operation
+    // MARK: Operations
     
     func operation(forIndexPath indexPath: IndexPath) -> Operation? {
         return downloadsInProgress[indexPath]
+    }
+    func suspendAllOperations () {
+        downloadQueue.isSuspended = true
+    }
+    func resumeAllOperations () {
+        downloadQueue.isSuspended = false
+    }
+    func loadPhotosForOnscreenCells() {
+        if let pathsArray = collectionView?.indexPathsForVisibleItems {
+            
+            let allPendingOperations = Set(downloadsInProgress.keys)
+            
+            var toBeCancelled = allPendingOperations
+            let visiblePaths = Set(pathsArray)
+            toBeCancelled.subtract(visiblePaths)
+            var toBeStarted = visiblePaths
+            toBeStarted.subtract(allPendingOperations)
+            
+            for indexPath in toBeCancelled {
+                if let pendingDownload = downloadsInProgress[indexPath] {
+                    pendingDownload.cancel()
+                }
+                downloadsInProgress.removeValue(forKey: indexPath)
+            }
+            
+            for indexPath in toBeStarted {
+                let photo = photos[indexPath.row]
+                startDownload(photo: photo, forIndexPath: indexPath)
+            }
+        }
     }
     
 }
