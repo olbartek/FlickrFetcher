@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E1A425F1DC8B29900DB1A98 /* PhotoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A425E1DC8B29900DB1A98 /* PhotoDownloader.swift */; };
+		4E1A42611DC8B40800DB1A98 /* PhotoDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A42601DC8B40800DB1A98 /* PhotoDownload.swift */; };
+		4E1A42661DC8BA4A00DB1A98 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A42651DC8BA4A00DB1A98 /* Photo.swift */; };
+		4E1A42681DC8BB1600DB1A98 /* URLDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A42671DC8BB1600DB1A98 /* URLDisplayable.swift */; };
 		4E30AC441DC7745E005CD240 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E30AC281DC7745E005CD240 /* AppDelegate.swift */; };
 		4E30AC451DC7745E005CD240 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E30AC2C1DC7745E005CD240 /* APIManager.swift */; };
 		4E30AC461DC7745E005CD240 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E30AC2D1DC7745E005CD240 /* RequestBuilder.swift */; };
@@ -30,6 +34,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E1A425E1DC8B29900DB1A98 /* PhotoDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoDownloader.swift; path = "Photo Downloader/PhotoDownloader.swift"; sourceTree = "<group>"; };
+		4E1A42601DC8B40800DB1A98 /* PhotoDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoDownload.swift; path = "Photo Downloader/PhotoDownload.swift"; sourceTree = "<group>"; };
+		4E1A42651DC8BA4A00DB1A98 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Photo.swift; path = Models/Photo.swift; sourceTree = "<group>"; };
+		4E1A42671DC8BB1600DB1A98 /* URLDisplayable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLDisplayable.swift; sourceTree = "<group>"; };
 		4E30ABED1DC74885005CD240 /* FlickrFetcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrFetcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E30AC281DC7745E005CD240 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E30AC2C1DC7745E005CD240 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -65,6 +73,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E1A425D1DC8B24900DB1A98 /* Photo Downloader */ = {
+			isa = PBXGroup;
+			children = (
+				4E1A425E1DC8B29900DB1A98 /* PhotoDownloader.swift */,
+				4E1A42601DC8B40800DB1A98 /* PhotoDownload.swift */,
+			);
+			name = "Photo Downloader";
+			sourceTree = "<group>";
+		};
+		4E1A42641DC8BA3100DB1A98 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4E1A42651DC8BA4A00DB1A98 /* Photo.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		4E30ABE41DC74885005CD240 = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +123,7 @@
 				4E30AC291DC7745E005CD240 /* Backend */,
 				4E30AC381DC7745E005CD240 /* Extensions */,
 				4E30AC551DC77A17005CD240 /* VIews */,
+				4E1A42641DC8BA3100DB1A98 /* Models */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -105,6 +131,7 @@
 		4E30AC291DC7745E005CD240 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
+				4E1A425D1DC8B24900DB1A98 /* Photo Downloader */,
 				4E30AC2A1DC7745E005CD240 /* API Manager */,
 			);
 			path = Backend;
@@ -147,6 +174,7 @@
 				4E30AC341DC7745E005CD240 /* JSONEncodable.swift */,
 				4E30AC351DC7745E005CD240 /* RequestBuilderType.swift */,
 				4E30AC361DC7745E005CD240 /* URLBuilderType.swift */,
+				4E1A42671DC8BB1600DB1A98 /* URLDisplayable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -279,16 +307,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E1A42681DC8BB1600DB1A98 /* URLDisplayable.swift in Sources */,
 				4E30AC5E1DC7C0BF005CD240 /* CALayer+ProxyColor.swift in Sources */,
 				4E30AC501DC7745E005CD240 /* UICollectionView+Reusable.swift in Sources */,
 				4E30AC491DC7745E005CD240 /* APIManagerType.swift in Sources */,
 				4E30AC4D1DC7745E005CD240 /* URLBuilderType.swift in Sources */,
+				4E1A42611DC8B40800DB1A98 /* PhotoDownload.swift in Sources */,
 				4E30AC461DC7745E005CD240 /* RequestBuilder.swift in Sources */,
 				4E30AC4A1DC7745E005CD240 /* JSONDecodable.swift in Sources */,
 				4E30AC471DC7745E005CD240 /* URLBuilder.swift in Sources */,
 				4E30AC481DC7745E005CD240 /* APIPhoto.swift in Sources */,
 				4E30AC4B1DC7745E005CD240 /* JSONEncodable.swift in Sources */,
+				4E1A425F1DC8B29900DB1A98 /* PhotoDownloader.swift in Sources */,
 				4E30AC4C1DC7745E005CD240 /* RequestBuilderType.swift in Sources */,
+				4E1A42661DC8BA4A00DB1A98 /* Photo.swift in Sources */,
 				4E30AC451DC7745E005CD240 /* APIManager.swift in Sources */,
 				4E30AC441DC7745E005CD240 /* AppDelegate.swift in Sources */,
 				4E30AC5B1DC7B85C005CD240 /* PhotoCollectionViewCell.swift in Sources */,
@@ -456,6 +488,7 @@
 				4E30AC011DC74885005CD240 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -28,7 +28,10 @@ class PhotosViewController: UIViewController {
         let requestBuilder = RequestBuilder()
         return APIManager(urlBuilder: urlBuilder, requestBuilder: requestBuilder)
     }
-    var photos = [APIPhoto]()
+    lazy var photoDownloader: PhotoDownloader = {
+        return PhotoDownloader(collectionView: self.collectionView)
+    }()
+    var photos = [Photo]()
     
     // MARK: VC's Lifecycle
     
@@ -41,7 +44,7 @@ class PhotosViewController: UIViewController {
             case .Error(error: let error):
                 print(error)
             case .Success(result: let photos):
-                self.photos = photos
+                self.photos = photos.map { Photo(url: $0.standardPhotoUrl) }
                 self.collectionView.reloadData()
             }
         }
@@ -55,8 +58,16 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(type: PhotoCollectionViewCell.self, indexPath: indexPath)
         let photo = photos[indexPath.row]
-        let data = try! Data(contentsOf: photo.standardPhotoUrl)
-        cell.imageView.image = UIImage(data: data)
+        if let image = photo.image { cell.imageView.image = image }
+        switch photo.state {
+        case .new:
+            cell.spinner.startAnimating()
+            photoDownloader.startDownload(photo: photo, forIndexPath: indexPath)
+        case .downloaded:
+            cell.spinner.stopAnimating()
+        case .failed:
+            cell.spinner.stopAnimating()
+        }
         return cell
     }
     
