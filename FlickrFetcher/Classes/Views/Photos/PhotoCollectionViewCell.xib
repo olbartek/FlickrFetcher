@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCollectionViewCell" id="gTV-IL-0wX" customClass="PhotoCollectionViewCell" customModule="FlickrFetcher" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tlr-dg-KhY">
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nYo-fl-ObW"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="lgs-MN-gbu"/>
+                        </subviews>
+                        <color key="backgroundColor" red="0.98039215690000003" green="0.29411764709999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="lgs-MN-gbu" firstAttribute="centerX" secondItem="Tlr-dg-KhY" secondAttribute="centerX" id="0xl-lP-Cnk"/>
+                            <constraint firstItem="nYo-fl-ObW" firstAttribute="leading" secondItem="Tlr-dg-KhY" secondAttribute="leading" id="6bY-mS-jSs"/>
+                            <constraint firstAttribute="trailing" secondItem="nYo-fl-ObW" secondAttribute="trailing" id="Eal-8g-Tg6"/>
+                            <constraint firstAttribute="bottom" secondItem="nYo-fl-ObW" secondAttribute="bottom" id="Uiy-WI-PYp"/>
+                            <constraint firstItem="nYo-fl-ObW" firstAttribute="top" secondItem="Tlr-dg-KhY" secondAttribute="top" id="aso-C4-J2f"/>
+                            <constraint firstItem="lgs-MN-gbu" firstAttribute="centerY" secondItem="Tlr-dg-KhY" secondAttribute="centerY" id="eQG-Ik-UL1"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="Tlr-dg-KhY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="KNh-zF-GgR"/>
+                <constraint firstItem="Tlr-dg-KhY" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="e6V-Gk-IWj"/>
+                <constraint firstAttribute="bottom" secondItem="Tlr-dg-KhY" secondAttribute="bottom" id="hqk-6i-vfx"/>
+                <constraint firstAttribute="trailing" secondItem="Tlr-dg-KhY" secondAttribute="trailing" id="rWk-UZ-NAe"/>
+            </constraints>
+            <size key="customSize" width="161" height="141"/>
+            <connections>
+                <outlet property="imageView" destination="nYo-fl-ObW" id="fBh-bR-lRn"/>
+                <outlet property="spinner" destination="lgs-MN-gbu" id="Cya-4x-1tj"/>
+            </connections>
+            <point key="canvasLocation" x="-27" y="84"/>
+        </collectionViewCell>
+    </objects>
+</document>

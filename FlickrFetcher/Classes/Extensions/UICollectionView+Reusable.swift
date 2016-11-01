@@ -1,8 +1,8 @@
 import UIKit
 
-extension UICollectionView {
+public extension UICollectionView {
 
-    public func dequeueReusableCell<T:UICollectionViewCell>(type: T.Type, indexPath: NSIndexPath) -> T {
+    public func dequeueReusableCell<T:UICollectionViewCell>(type: T.Type, indexPath: IndexPath) -> T {
         let collectionCell  : T
         let cellIdentifier  = String(describing: T.self)
 

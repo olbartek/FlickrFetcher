@@ -24,6 +24,9 @@
 		4E30AC521DC7745E005CD240 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E30AC3E1DC7745E005CD240 /* LaunchScreen.storyboard */; };
 		4E30AC531DC7745E005CD240 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E30AC401DC7745E005CD240 /* Main.storyboard */; };
 		4E30AC581DC77A4D005CD240 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E30AC571DC77A4D005CD240 /* PhotosViewController.swift */; };
+		4E30AC5B1DC7B85C005CD240 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E30AC591DC7B85B005CD240 /* PhotoCollectionViewCell.swift */; };
+		4E30AC5C1DC7B85C005CD240 /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E30AC5A1DC7B85C005CD240 /* PhotoCollectionViewCell.xib */; };
+		4E30AC5E1DC7C0BF005CD240 /* CALayer+ProxyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E30AC5D1DC7C0BF005CD240 /* CALayer+ProxyColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +49,9 @@
 		4E30AC411DC7745E005CD240 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4E30AC431DC7745E005CD240 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E30AC571DC77A4D005CD240 /* PhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotosViewController.swift; path = Views/Photos/PhotosViewController.swift; sourceTree = "<group>"; };
+		4E30AC591DC7B85B005CD240 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCollectionViewCell.swift; path = Views/Photos/PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		4E30AC5A1DC7B85C005CD240 /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoCollectionViewCell.xib; path = Views/Photos/PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
+		4E30AC5D1DC7C0BF005CD240 /* CALayer+ProxyColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+ProxyColor.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +156,7 @@
 			children = (
 				4E30AC391DC7745E005CD240 /* Mirror+PropertiesString.swift */,
 				4E30AC3A1DC7745E005CD240 /* UICollectionView+Reusable.swift */,
+				4E30AC5D1DC7C0BF005CD240 /* CALayer+ProxyColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -192,6 +199,8 @@
 			isa = PBXGroup;
 			children = (
 				4E30AC571DC77A4D005CD240 /* PhotosViewController.swift */,
+				4E30AC591DC7B85B005CD240 /* PhotoCollectionViewCell.swift */,
+				4E30AC5A1DC7B85C005CD240 /* PhotoCollectionViewCell.xib */,
 			);
 			name = Photos;
 			sourceTree = "<group>";
@@ -257,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E30AC531DC7745E005CD240 /* Main.storyboard in Resources */,
+				4E30AC5C1DC7B85C005CD240 /* PhotoCollectionViewCell.xib in Resources */,
 				4E30AC511DC7745E005CD240 /* Assets.xcassets in Resources */,
 				4E30AC521DC7745E005CD240 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -269,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E30AC5E1DC7C0BF005CD240 /* CALayer+ProxyColor.swift in Sources */,
 				4E30AC501DC7745E005CD240 /* UICollectionView+Reusable.swift in Sources */,
 				4E30AC491DC7745E005CD240 /* APIManagerType.swift in Sources */,
 				4E30AC4D1DC7745E005CD240 /* URLBuilderType.swift in Sources */,
@@ -280,6 +291,7 @@
 				4E30AC4C1DC7745E005CD240 /* RequestBuilderType.swift in Sources */,
 				4E30AC451DC7745E005CD240 /* APIManager.swift in Sources */,
 				4E30AC441DC7745E005CD240 /* AppDelegate.swift in Sources */,
+				4E30AC5B1DC7B85C005CD240 /* PhotoCollectionViewCell.swift in Sources */,
 				4E30AC581DC77A4D005CD240 /* PhotosViewController.swift in Sources */,
 				4E30AC4F1DC7745E005CD240 /* Mirror+PropertiesString.swift in Sources */,
 				4E30AC4E1DC7745E005CD240 /* Result.swift in Sources */,

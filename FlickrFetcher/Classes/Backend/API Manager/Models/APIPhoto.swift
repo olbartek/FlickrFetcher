@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum APIPhotoState {
+    case new, downloaded, failed
+}
+
 struct APIPhoto {
     
     let id: String
@@ -17,8 +21,18 @@ struct APIPhoto {
     let farm: Int
     let title: String
     
-    var url: URL {
+    var state: APIPhotoState = .new
+    
+    var standardPhotoUrl: URL {
         let urlString = "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret).jpg"
+        return URL(string: urlString)!
+    }
+    var largeSquarePhotoUrl: URL {
+        let urlString = "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_q.jpg"
+        return URL(string: urlString)!
+    }
+    var mediumPhotoUrl: URL {
+        let urlString = "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_z.jpg"
         return URL(string: urlString)!
     }
     
