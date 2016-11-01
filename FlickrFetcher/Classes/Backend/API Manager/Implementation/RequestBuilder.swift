@@ -21,9 +21,12 @@ final class RequestBuilder: RequestBuilderType {
                 completion(Result.Error(error: error))
                 return
             }
-            
-            guard let data = data, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                //completion(Result.Error(error: Error())) error handling wrong status code
+            guard let data = data, let httpResponse = response as? HTTPURLResponse else {
+                completion(Result.Error(error: APIError.noData))
+                return
+            }
+            guard httpResponse.statusCode == 200 else {
+                completion(Result.Error(error: APIError.wrongHttpCode(code: httpResponse.statusCode)))
                 return
             }
             
@@ -31,7 +34,7 @@ final class RequestBuilder: RequestBuilderType {
                 let jsonResponse = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
                 let photo = (jsonResponse?["photos"] as? [String: Any])?["photo"] as? [String: Any]
             else {
-                // Error
+                completion(Result.Error(error: APIError.jsonSerializationFailed))
                 return
             }
             
@@ -49,9 +52,12 @@ final class RequestBuilder: RequestBuilderType {
                 completion(ArrayResult.Error(error: error))
                 return
             }
-            
-            guard let data = data, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                //completion(Result.Error(error: Error())) error handling wrong status code
+            guard let data = data, let httpResponse = response as? HTTPURLResponse else {
+                completion(ArrayResult.Error(error: APIError.noData))
+                return
+            }
+            guard httpResponse.statusCode == 200 else {
+                completion(ArrayResult.Error(error: APIError.wrongHttpCode(code: httpResponse.statusCode)))
                 return
             }
             
@@ -59,7 +65,7 @@ final class RequestBuilder: RequestBuilderType {
                 let jsonResponse = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
                 let photos = (jsonResponse?["photos"] as? [String: Any])?["photo"] as? [[String: Any]]
                 else {
-                    // Error
+                    completion(ArrayResult.Error(error: APIError.jsonSerializationFailed))
                     return
             }
             
@@ -67,52 +73,6 @@ final class RequestBuilder: RequestBuilderType {
             
             }.resume()
     }
-    
-//    func POSTRequest(withURL url: URL, parameters: Dictionary<String, Any>? = nil, completion: @escaping ResultBlock<[String: Any]>) {
-//        let conf = configuration(forURL: url, parameters: parameters, httpMethod: "POST")
-//        
-//        conf.session.dataTask(with: conf.request) { (data, response, error) in
-//            
-//            if let error = error {
-//                completion(Result.Error(error: error))
-//                return
-//            }
-//            
-//            guard let data = data, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-//                //completion(Result.Error(error: Error())) error handling
-//                return
-//            }
-//            
-//            let jsonResponse = JSON(data: data)
-//            completion(Result.Success(result: jsonResponse))
-//            
-//        }.resume()
-//    }
-//    
-//    func POSTRequest(withURL url: URL, parameters: Dictionary<String, Any>? = nil, completion: @escaping ArrayResultBlock<[String: Any]>) {
-//        let conf = configuration(forURL: url, parameters: parameters, httpMethod: "POST")
-//        
-//        conf.session.dataTask(with: conf.request) { (data, response, error) in
-//            
-//            if let error = error {
-//                completion(ArrayResult.Error(error: error))
-//                return
-//            }
-//            
-//            guard let data = data, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-//                //completion(ArrayResult.Error(error: Error())) error handling
-//                return
-//            }
-//            
-//            let jsonResponse = JSON(data: data)
-//            if let jsonResponseArray = jsonResponse.array {
-//                completion(ArrayResult.Success(result: jsonResponseArray))
-//            } else {
-//                //completion(ArrayResult.Error(error: Error())) error cannot convert to array
-//            }
-//            
-//            }.resume()
-//    }
     
     fileprivate func configuration(forURL url: URL, parameters: Dictionary<String, String>? = nil, httpMethod: String)  -> (request: URLRequest, session: URLSession) {
         let sessionConfiguration = URLSessionConfiguration.default

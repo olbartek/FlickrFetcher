@@ -12,6 +12,7 @@
 		4E1A42661DC8BA4A00DB1A98 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A42651DC8BA4A00DB1A98 /* Photo.swift */; };
 		4E1A42681DC8BB1600DB1A98 /* URLDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A42671DC8BB1600DB1A98 /* URLDisplayable.swift */; };
 		4E1A426A1DC91A8500DB1A98 /* String+Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A42691DC91A8500DB1A98 /* String+Tag.swift */; };
+		4E1A426C1DC91EF200DB1A98 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A426B1DC91EF200DB1A98 /* APIError.swift */; };
 		4E30AC441DC7745E005CD240 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E30AC281DC7745E005CD240 /* AppDelegate.swift */; };
 		4E30AC451DC7745E005CD240 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E30AC2C1DC7745E005CD240 /* APIManager.swift */; };
 		4E30AC461DC7745E005CD240 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E30AC2D1DC7745E005CD240 /* RequestBuilder.swift */; };
@@ -40,6 +41,7 @@
 		4E1A42651DC8BA4A00DB1A98 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Photo.swift; path = Models/Photo.swift; sourceTree = "<group>"; };
 		4E1A42671DC8BB1600DB1A98 /* URLDisplayable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLDisplayable.swift; sourceTree = "<group>"; };
 		4E1A42691DC91A8500DB1A98 /* String+Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Tag.swift"; sourceTree = "<group>"; };
+		4E1A426B1DC91EF200DB1A98 /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		4E30ABED1DC74885005CD240 /* FlickrFetcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrFetcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E30AC281DC7745E005CD240 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E30AC2C1DC7745E005CD240 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				4E30AC2F1DC7745E005CD240 /* Models */,
 				4E30AC311DC7745E005CD240 /* Protocols */,
 				4E30AC371DC7745E005CD240 /* Result.swift */,
+				4E1A426B1DC91EF200DB1A98 /* APIError.swift */,
 			);
 			path = "API Manager";
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				4E30AC581DC77A4D005CD240 /* PhotosViewController.swift in Sources */,
 				4E30AC4F1DC7745E005CD240 /* Mirror+PropertiesString.swift in Sources */,
 				4E30AC4E1DC7745E005CD240 /* Result.swift in Sources */,
+				4E1A426C1DC91EF200DB1A98 /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
