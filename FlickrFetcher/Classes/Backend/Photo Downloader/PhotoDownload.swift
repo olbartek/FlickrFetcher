@@ -11,20 +11,33 @@ import UIKit
 class PhotoDownload: Operation {
     
     fileprivate var photo: Photo
+    fileprivate let realmManager: RealmManagerType
     
-    init(photo: Photo) {
+    init(photo: Photo, realmManager: RealmManagerType) {
         self.photo = photo
+        self.realmManager = realmManager
     }
     
     override func main() {
         if isCancelled { return }
-        guard let imageData = try? Data(contentsOf: photo.url) else {
+        
+        var imageData: Data?
+        
+        imageData = realmManager.photoData(withUrl: photo.url)
+        if imageData == nil {
+            if let imgData = try? Data(contentsOf: photo.url) {
+                imageData = imgData
+                realmManager.createAndSavePhoto(withUrl: photo.url, imageData: imgData)
+            }
+        }
+        guard let imageUnwrappedData = imageData else {
             photo.state = .failed
             return
         }
+        
         if isCancelled { return }
-        if imageData.count > 0 {
-            photo.image = UIImage(data: imageData)
+        if imageUnwrappedData.count > 0 {
+            photo.image = UIImage(data: imageUnwrappedData)
             photo.state = .downloaded
         } else {
             photo.state = .failed

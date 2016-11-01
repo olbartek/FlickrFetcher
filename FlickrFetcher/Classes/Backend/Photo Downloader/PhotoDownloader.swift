@@ -21,13 +21,15 @@ class PhotoDownloader {
         return queue
     }()
     
-    weak var collectionView: UICollectionView?
+    private weak var collectionView: UICollectionView?
+    private let realmManager: RealmManagerType
     private var photos = [Photo]()
     
     // MARK: Initialization
     
-    init(collectionView: UICollectionView) {
+    init(collectionView: UICollectionView, realmManager: RealmManagerType) {
         self.collectionView = collectionView
+        self.realmManager = realmManager
     }
     
     func set(photos: [Photo]) {
@@ -40,7 +42,7 @@ class PhotoDownloader {
         
         if let _ = downloadsInProgress[indexPath] { return }
         
-        let photoDownloadOperation = PhotoDownload(photo: photo)
+        let photoDownloadOperation = PhotoDownload(photo: photo, realmManager: realmManager)
 
         photoDownloadOperation.completionBlock = { [weak self] in
             guard let `self` = self else { return }

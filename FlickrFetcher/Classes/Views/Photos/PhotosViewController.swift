@@ -34,7 +34,8 @@ class PhotosViewController: UIViewController {
         return APIManager(urlBuilder: urlBuilder, requestBuilder: requestBuilder)
     }
     lazy var photoDownloader: PhotoDownloader = {
-        return PhotoDownloader(collectionView: self.collectionView)
+        let realmManager = RealmManager()
+        return PhotoDownloader(collectionView: self.collectionView, realmManager: realmManager)
     }()
     var photos = [Photo]() {
         didSet {
@@ -69,7 +70,7 @@ class PhotosViewController: UIViewController {
 
 }
 
-extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDataSourcePrefetching {
+extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(type: PhotoCollectionViewCell.self, indexPath: indexPath)
@@ -95,20 +96,6 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return cellSize
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        print("Prefetch items")
-        for indexPath in indexPaths {
-            print("Row = \(indexPath.row)\n")
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
-        print("Cancel prefetching")
-        for indexPath in indexPaths {
-            print("Row = \(indexPath.row)\n")
-        }
     }
 }
 
