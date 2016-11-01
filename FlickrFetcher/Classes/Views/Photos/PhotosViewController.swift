@@ -37,8 +37,12 @@ class PhotosViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        apiManager.fetchPhotos(withTag: "dog") { [weak self] result in
+    }
+    
+    // MARK: Photos Searching
+    
+    func searchPhotos(withTag tag: String) {
+        apiManager.fetchPhotos(withTag: tag) { [weak self] result in
             guard let `self` = self else { return }
             switch result {
             case .Error(error: let error):
@@ -48,7 +52,6 @@ class PhotosViewController: UIViewController {
                 self.collectionView.reloadData()
             }
         }
-        
     }
 
 }
@@ -78,5 +81,11 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CellSize
     }
-    
+}
+
+extension PhotosViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let tag = searchBar.text else { return }
+        searchPhotos(withTag: tag)
+    }
 }

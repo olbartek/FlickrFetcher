@@ -13,5 +13,8 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
-
+    override func prepareForReuse() {
+        self.imageView.image = nil
+        self.spinner.startAnimating()
+    }
 }
