@@ -20,6 +20,10 @@
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="e6z-Wp-Bco">
                                 <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="D96-Nu-ThX"/>
                                 </connections>
@@ -36,6 +40,7 @@
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="vux-9D-BO3"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="eUm-Mr-kef"/>
+                                    <outlet property="prefetchDataSource" destination="BYZ-38-t0r" id="LiF-d0-Y0B"/>
                                 </connections>
                             </collectionView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3wJ-Xf-TQ6"/>

@@ -12,7 +12,7 @@ class PhotosViewController: UIViewController {
     
     // MARK: Constants
     
-    fileprivate lazy var CellSize: CGSize = {
+    fileprivate lazy var cellSize: CGSize = {
         let offset: CGFloat = 5.0
         let cellWidth = UIScreen.main.bounds.size.width / 2 - offset
         return CGSize(width: cellWidth, height: cellWidth)
@@ -20,7 +20,11 @@ class PhotosViewController: UIViewController {
     
     // MARK: Properties
     
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchBar: UISearchBar! {
+        didSet {
+            searchBar.autocapitalizationType = .none
+        }
+    }
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
@@ -46,8 +50,8 @@ class PhotosViewController: UIViewController {
     
     // MARK: Photos Searching
     
-    func searchPhotos(withTag tag: String) {
-        apiManager.fetchPhotos(withTag: tag) { [weak self] result in
+    func searchPhotos(withText text: String) {
+        apiManager.fetchPhotos(withTag: text.stringTag) { [weak self] result in
             guard let `self` = self else { return }
             switch result {
             case .Error(error: let error):
@@ -55,20 +59,21 @@ class PhotosViewController: UIViewController {
             case .Success(result: let apiPhotos):
                 let photos = apiPhotos.map { Photo(url: $0.standardPhotoUrl) }
                 self.photos = photos
-                self.spinner.stopAnimating()
-                self.collectionView.reloadData()
+                DispatchQueue.main.async {
+                    self.spinner.stopAnimating()
+                    self.collectionView.reloadData()
+                }
             }
         }
     }
 
 }
 
-extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDataSourcePrefetching {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(type: PhotoCollectionViewCell.self, indexPath: indexPath)
         let photo = photos[indexPath.row]
-        if let image = photo.image { cell.imageView.image = image }
         switch photo.state {
         case .new:
             cell.spinner.startAnimating()
@@ -77,6 +82,7 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
             }
         case .downloaded:
             cell.spinner.stopAnimating()
+            if let image = photo.image { cell.imageView.image = image }
         case .failed:
             cell.spinner.stopAnimating()
         }
@@ -88,14 +94,29 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CellSize
+        return cellSize
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        print("Prefetch items")
+        for indexPath in indexPaths {
+            print("Row = \(indexPath.row)\n")
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        print("Cancel prefetching")
+        for indexPath in indexPaths {
+            print("Row = \(indexPath.row)\n")
+        }
     }
 }
 
 extension PhotosViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let tag = searchBar.text else { return }
-        searchPhotos(withTag: tag)
+        guard let text = searchBar.text else { return }
+        view.endEditing(true)
+        searchPhotos(withText: text)
         spinner.startAnimating()
     }
 }
