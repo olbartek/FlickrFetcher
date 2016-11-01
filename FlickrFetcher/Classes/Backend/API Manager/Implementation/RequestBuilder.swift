@@ -12,64 +12,82 @@ final class RequestBuilder: RequestBuilderType {
     
     // MARK: Requests
     
-    func GETRequest(withURL url: URL, completion: @escaping ResultBlock<[String: Any]>) {
+    func GETRequest(withURL url: URL, completion: @escaping PaginationResultBlock<[String: Any]>) {
         let conf = configuration(forURL: url, httpMethod: "GET")
         
         conf.session.dataTask(with: conf.request) { (data, response, error) in
             
             if let error = error {
-                completion(Result.Error(error: error))
+                completion(Result.Error(error: error), nil)
                 return
             }
             guard let data = data, let httpResponse = response as? HTTPURLResponse else {
-                completion(Result.Error(error: APIError.noData))
+                completion(Result.Error(error: APIError.noData), nil)
                 return
             }
             guard httpResponse.statusCode == 200 else {
-                completion(Result.Error(error: APIError.wrongHttpCode(code: httpResponse.statusCode)))
+                completion(Result.Error(error: APIError.wrongHttpCode(code: httpResponse.statusCode)), nil)
                 return
             }
             
             guard
                 let jsonResponse = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
-                let photo = (jsonResponse?["photos"] as? [String: Any])?["photo"] as? [String: Any]
+                let photos = jsonResponse?["photos"] as? [String: Any],
+                let photo = photos["photo"] as? [String: Any]
             else {
-                completion(Result.Error(error: APIError.jsonSerializationFailed))
+                completion(Result.Error(error: APIError.jsonSerializationFailed), nil)
                 return
             }
-            
-            completion(Result.Success(result: photo))
+            guard
+                let page = photos["page"] as? Int,
+                let pages = photos["pages"] as? Int,
+                let perPage = photos["perpage"] as? Int
+            else {
+                completion(Result.Success(result: photo), nil)
+                return
+            }
+            let pagination = APIPagination(page: page, pages: pages, perPage: perPage)
+            completion(Result.Success(result: photo), pagination)
             
         }.resume()
     }
     
-    func GETRequest(withURL url: URL, completion: @escaping ArrayResultBlock<[String: Any]>) {
+    func GETRequest(withURL url: URL, completion: @escaping PaginationArrayResultBlock<[String: Any]>) {
         let conf = configuration(forURL: url, httpMethod: "GET")
         
         conf.session.dataTask(with: conf.request) { (data, response, error) in
             
             if let error = error {
-                completion(ArrayResult.Error(error: error))
+                completion(ArrayResult.Error(error: error), nil)
                 return
             }
             guard let data = data, let httpResponse = response as? HTTPURLResponse else {
-                completion(ArrayResult.Error(error: APIError.noData))
+                completion(ArrayResult.Error(error: APIError.noData), nil)
                 return
             }
             guard httpResponse.statusCode == 200 else {
-                completion(ArrayResult.Error(error: APIError.wrongHttpCode(code: httpResponse.statusCode)))
+                completion(ArrayResult.Error(error: APIError.wrongHttpCode(code: httpResponse.statusCode)), nil)
                 return
             }
             
             guard
                 let jsonResponse = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
-                let photos = (jsonResponse?["photos"] as? [String: Any])?["photo"] as? [[String: Any]]
+                let photos = jsonResponse?["photos"] as? [String: Any],
+                let photo = photos["photo"] as? [[String: Any]]
                 else {
-                    completion(ArrayResult.Error(error: APIError.jsonSerializationFailed))
+                    completion(ArrayResult.Error(error: APIError.jsonSerializationFailed), nil)
                     return
             }
-            
-            completion(ArrayResult.Success(result: photos))
+            guard
+                let page = photos["page"] as? Int,
+                let pages = photos["pages"] as? Int,
+                let perPage = photos["perpage"] as? Int
+                else {
+                    completion(ArrayResult.Success(result: photo), nil)
+                    return
+            }
+            let pagination = APIPagination(page: page, pages: pages, perPage: perPage)
+            completion(ArrayResult.Success(result: photo), pagination)
             
             }.resume()
     }

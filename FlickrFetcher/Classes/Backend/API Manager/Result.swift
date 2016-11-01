@@ -20,3 +20,6 @@ enum ArrayResult<T> {
 
 typealias ResultBlock<T>        = (Result<T>) -> ()
 typealias ArrayResultBlock<T>   = (ArrayResult<T>) -> ()
+
+typealias PaginationResultBlock<T>        = (Result<T>, APIPagination?) -> ()
+typealias PaginationArrayResultBlock<T>   = (ArrayResult<T>, APIPagination?) -> ()

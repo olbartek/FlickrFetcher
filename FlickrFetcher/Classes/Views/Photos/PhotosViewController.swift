@@ -42,6 +42,9 @@ class PhotosViewController: UIViewController {
             photoDownloader.set(photos: self.photos)
         }
     }
+    var currentTextToSearch = ""
+    var currentPageToFetch = 1
+    var totalNumberOfPages = Int.max
     
     // MARK: VC's Lifecycle
     
@@ -52,18 +55,25 @@ class PhotosViewController: UIViewController {
     // MARK: Photos Searching
     
     func searchPhotos(withText text: String) {
-        apiManager.fetchPhotos(withTag: text.stringTag) { [weak self] result in
+        apiManager.fetchPhotos(withTag: text.stringTag, pageNumber: currentPageToFetch) { [weak self] result in
             guard let `self` = self else { return }
-            switch result {
+            switch result.0 {
             case .Error(error: let error):
                 print(error)
             case .Success(result: let apiPhotos):
                 let photos = apiPhotos.map { Photo(url: $0.standardPhotoUrl) }
-                self.photos = photos
+                self.photos.append(contentsOf: photos)
                 DispatchQueue.main.async {
                     self.spinner.stopAnimating()
                     self.collectionView.reloadData()
                 }
+            }
+            if let pagination = result.1 {
+                if self.currentPageToFetch <= self.totalNumberOfPages {
+                    self.currentPageToFetch = pagination.currentPage + 1
+                    self.totalNumberOfPages = pagination.numberOfPages
+                }
+                
             }
         }
     }
@@ -102,8 +112,13 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
 extension PhotosViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text else { return }
-        view.endEditing(true)
+        currentTextToSearch = text
+        currentPageToFetch = 1
+        totalNumberOfPages = Int.max
+        self.photos.removeAll()
         searchPhotos(withText: text)
+        
+        view.endEditing(true)
         spinner.startAnimating()
     }
 }
@@ -121,5 +136,10 @@ extension PhotosViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         photoDownloader.loadPhotosForOnscreenCells()
         photoDownloader.resumeAllOperations()
+        
+        let bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height
+        if (bottomEdge >= self.collectionView.collectionViewLayout.collectionViewContentSize.height) {
+            searchPhotos(withText: currentTextToSearch)
+        }
     }
 }

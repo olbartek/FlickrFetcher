@@ -20,6 +20,7 @@
 		4E1A42791DC9406E00DB1A98 /* ManagedPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A42781DC9406E00DB1A98 /* ManagedPhoto.swift */; };
 		4E1A427B1DC9423D00DB1A98 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A427A1DC9423D00DB1A98 /* RealmManager.swift */; };
 		4E1A427F1DC9426F00DB1A98 /* RealmManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A427E1DC9426F00DB1A98 /* RealmManagerType.swift */; };
+		4E1A42811DC952A400DB1A98 /* APIPagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A42801DC952A400DB1A98 /* APIPagination.swift */; };
 		4E30AC441DC7745E005CD240 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E30AC281DC7745E005CD240 /* AppDelegate.swift */; };
 		4E30AC451DC7745E005CD240 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E30AC2C1DC7745E005CD240 /* APIManager.swift */; };
 		4E30AC461DC7745E005CD240 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E30AC2D1DC7745E005CD240 /* RequestBuilder.swift */; };
@@ -69,6 +70,7 @@
 		4E1A42781DC9406E00DB1A98 /* ManagedPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManagedPhoto.swift; path = "Realm Manager/Entities/ManagedPhoto.swift"; sourceTree = "<group>"; };
 		4E1A427A1DC9423D00DB1A98 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmManager.swift; path = "Realm Manager/Implementations/RealmManager.swift"; sourceTree = "<group>"; };
 		4E1A427E1DC9426F00DB1A98 /* RealmManagerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmManagerType.swift; path = "Realm Manager/Protocols/RealmManagerType.swift"; sourceTree = "<group>"; };
+		4E1A42801DC952A400DB1A98 /* APIPagination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPagination.swift; sourceTree = "<group>"; };
 		4E30ABED1DC74885005CD240 /* FlickrFetcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrFetcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E30AC281DC7745E005CD240 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E30AC2C1DC7745E005CD240 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				4E30AC301DC7745E005CD240 /* APIPhoto.swift */,
+				4E1A42801DC952A400DB1A98 /* APIPagination.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				4E30AC4A1DC7745E005CD240 /* JSONDecodable.swift in Sources */,
 				4E30AC471DC7745E005CD240 /* URLBuilder.swift in Sources */,
 				4E30AC481DC7745E005CD240 /* APIPhoto.swift in Sources */,
+				4E1A42811DC952A400DB1A98 /* APIPagination.swift in Sources */,
 				4E30AC4B1DC7745E005CD240 /* JSONEncodable.swift in Sources */,
 				4E1A425F1DC8B29900DB1A98 /* PhotoDownloader.swift in Sources */,
 				4E30AC4C1DC7745E005CD240 /* RequestBuilderType.swift in Sources */,

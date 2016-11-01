@@ -10,7 +10,7 @@ import Foundation
 
 protocol RequestBuilderType {
     
-    func GETRequest(withURL url: URL, completion: @escaping ResultBlock<[String: Any]>)
-    func GETRequest(withURL url: URL, completion: @escaping ArrayResultBlock<[String: Any]>)
+    func GETRequest(withURL url: URL, completion: @escaping PaginationResultBlock<[String: Any]>)
+    func GETRequest(withURL url: URL, completion: @escaping PaginationArrayResultBlock<[String: Any]>)
     
 }

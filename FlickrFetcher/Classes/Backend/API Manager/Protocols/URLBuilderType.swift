@@ -10,6 +10,6 @@ import Foundation
 
 protocol URLBuilderType: class {
     
-    func photosSearchUrl(withTag tag: String) -> URL
-    func photosGetRecentUrl(withTag tag: String) -> URL
+    func photosSearchUrl(withTag tag: String, pageNumber: Int) -> URL
+    func photosGetRecentUrl(withTag tag: String, pageNumber: Int) -> URL
 }
