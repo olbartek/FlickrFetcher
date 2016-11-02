@@ -90,9 +90,7 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         switch photo.state {
         case .new:
             cell.spinner.startAnimating()
-            if (!collectionView.isDragging && !collectionView.isDecelerating) {
-                photoDownloader.startDownload(photo: photo, forIndexPath: indexPath)
-            }
+            photoDownloader.startOperation(atIndexPath: indexPath)
         case .downloaded:
             cell.spinner.stopAnimating()
             if let image = photo.image { cell.imageView.image = image }
@@ -113,6 +111,10 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard (indexPath.row + Constants.NextPageOffset) >= photos.count else { return }
         searchPhotos(withTag: currentTagToSearch)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        photoDownloader.cancelOperation(atIndexPath: indexPath)
     }
 }
 
@@ -141,12 +143,10 @@ extension PhotosViewController: UIScrollViewDelegate {
     }
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
-            photoDownloader.loadPhotosForOnscreenCells()
             photoDownloader.resumeAllOperations()
         }
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        photoDownloader.loadPhotosForOnscreenCells()
         photoDownloader.resumeAllOperations()
     }
 }

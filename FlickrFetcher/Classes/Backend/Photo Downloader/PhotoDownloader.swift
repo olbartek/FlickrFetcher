@@ -17,7 +17,6 @@ class PhotoDownloader {
     private lazy var downloadQueue: OperationQueue = {
         var queue = OperationQueue()
         queue.name = "Download queue"
-        //queue.maxConcurrentOperationCount = 1
         return queue
     }()
     
@@ -39,7 +38,6 @@ class PhotoDownloader {
     // MARK: Download Operations
     
     func startDownload(photo: Photo, forIndexPath indexPath: IndexPath) {
-        
         if let _ = downloadsInProgress[indexPath] { return }
         
         let photoDownloadOperation = PhotoDownload(photo: photo, realmManager: realmManager)
@@ -64,33 +62,43 @@ class PhotoDownloader {
     func operation(forIndexPath indexPath: IndexPath) -> Operation? {
         return downloadsInProgress[indexPath]
     }
+    
+    func cancelOperation(atIndexPath indexPath: IndexPath) {
+        if let pendingDownload = downloadsInProgress[indexPath] {
+            pendingDownload.cancel()
+            downloadsInProgress.removeValue(forKey: indexPath)
+        }
+    }
+    
+    func startOperation(atIndexPath indexPath: IndexPath) {
+        let photo = photos[indexPath.row]
+        startDownload(photo: photo, forIndexPath: indexPath)
+    }
+    
     func suspendAllOperations () {
         downloadQueue.isSuspended = true
     }
+    
     func resumeAllOperations () {
         downloadQueue.isSuspended = false
     }
+    
     func loadPhotosForOnscreenCells() {
-        if let pathsArray = collectionView?.indexPathsForVisibleItems {
-            
+        if let visiblePathsArray = collectionView?.indexPathsForVisibleItems {
             let allPendingOperations = Set(downloadsInProgress.keys)
             
             var toBeCancelled = allPendingOperations
-            let visiblePaths = Set(pathsArray)
+            let visiblePaths = Set(visiblePathsArray)
             toBeCancelled.subtract(visiblePaths)
             var toBeStarted = visiblePaths
             toBeStarted.subtract(allPendingOperations)
             
             for indexPath in toBeCancelled {
-                if let pendingDownload = downloadsInProgress[indexPath] {
-                    pendingDownload.cancel()
-                }
-                downloadsInProgress.removeValue(forKey: indexPath)
+                cancelOperation(atIndexPath: indexPath)
             }
             
             for indexPath in toBeStarted {
-                let photo = photos[indexPath.row]
-                startDownload(photo: photo, forIndexPath: indexPath)
+                startOperation(atIndexPath: indexPath)
             }
         }
     }
