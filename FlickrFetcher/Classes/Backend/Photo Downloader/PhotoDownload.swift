@@ -38,7 +38,6 @@ class PhotoDownload: Operation {
         
         if isCancelled { return }
         if imageUnwrappedData.count > 0 {
-            photo.image = UIImage(data: imageUnwrappedData)
             photo.state = .downloaded
         } else {
             photo.state = .failed

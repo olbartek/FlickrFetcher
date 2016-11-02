@@ -37,7 +37,7 @@ class PhotosViewController: UIViewController {
         let requestBuilder = RequestBuilder()
         return APIManager(urlBuilder: urlBuilder, requestBuilder: requestBuilder)
     }
-    lazy var photoDownloader: PhotoDownloader = {
+    lazy var photoDownloader: PhotoDownloaderType = {
         let realmManager = RealmManager()
         return PhotoDownloader(collectionView: self.collectionView, realmManager: realmManager)
     }()
@@ -96,7 +96,7 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
             photoDownloader.startOperation(atIndexPath: indexPath)
         case .downloaded:
             cell.spinner.stopAnimating()
-            if let image = photo.image { cell.imageView.image = image }
+            if let image = photoDownloader.photo(forIndexPath: indexPath) { cell.imageView.image = image }
         case .failed:
             cell.spinner.stopAnimating()
         }

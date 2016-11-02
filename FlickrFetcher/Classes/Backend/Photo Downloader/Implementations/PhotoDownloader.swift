@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class PhotoDownloader {
+final class PhotoDownloader: PhotoDownloaderType {
     
     // MARK: Properties
     
@@ -82,6 +82,18 @@ class PhotoDownloader {
     
     func resumeAllOperations () {
         downloadQueue.isSuspended = false
+    }
+    
+    // MARK: Photos
+    
+    func photo(forIndexPath indexPath: IndexPath) -> UIImage? {
+        let photoUrl = photos[indexPath.row].url
+        let imageData = realmManager.photoData(withUrl: photoUrl)
+        if let imageData = imageData {
+            return UIImage(data: imageData)
+        } else {
+            return nil
+        }
     }
     
 }

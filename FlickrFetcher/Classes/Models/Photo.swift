@@ -16,7 +16,6 @@ enum APIPhotoState {
 class Photo {
     
     var state: APIPhotoState = .new
-    var image: UIImage?
     let url: URL
     
     init(url: URL) {
