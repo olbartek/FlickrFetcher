@@ -42,8 +42,8 @@ class PhotoDownloader {
         
         let photoDownloadOperation = PhotoDownload(photo: photo, realmManager: realmManager)
 
-        photoDownloadOperation.completionBlock = { [weak self] in
-            guard let `self` = self else { return }
+        photoDownloadOperation.completionBlock = { [weak self, weak photoDownloadOperation] in
+            guard let `self` = self, let photoDownloadOperation = photoDownloadOperation else { return }
             if photoDownloadOperation.isCancelled { return }
             DispatchQueue.main.async { [weak self] in
                 guard let `self` = self else { return }
@@ -82,26 +82,6 @@ class PhotoDownloader {
     
     func resumeAllOperations () {
         downloadQueue.isSuspended = false
-    }
-    
-    func loadPhotosForOnscreenCells() {
-        if let visiblePathsArray = collectionView?.indexPathsForVisibleItems {
-            let allPendingOperations = Set(downloadsInProgress.keys)
-            
-            var toBeCancelled = allPendingOperations
-            let visiblePaths = Set(visiblePathsArray)
-            toBeCancelled.subtract(visiblePaths)
-            var toBeStarted = visiblePaths
-            toBeStarted.subtract(allPendingOperations)
-            
-            for indexPath in toBeCancelled {
-                cancelOperation(atIndexPath: indexPath)
-            }
-            
-            for indexPath in toBeStarted {
-                startOperation(atIndexPath: indexPath)
-            }
-        }
     }
     
 }

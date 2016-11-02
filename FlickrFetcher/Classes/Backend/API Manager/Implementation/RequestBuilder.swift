@@ -13,9 +13,9 @@ final class RequestBuilder: RequestBuilderType {
     // MARK: Requests
     
     func GETRequest(withURL url: URL, completion: @escaping PaginationResultBlock<[String: Any]>) {
-        let conf = configuration(forURL: url, httpMethod: "GET")
+        let (request, session) = configuration(forURL: url, httpMethod: "GET")
         
-        conf.session.dataTask(with: conf.request) { (data, response, error) in
+        session.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
                 completion(Result.Error(error: error), nil)
@@ -53,9 +53,9 @@ final class RequestBuilder: RequestBuilderType {
     }
     
     func GETRequest(withURL url: URL, completion: @escaping PaginationArrayResultBlock<[String: Any]>) {
-        let conf = configuration(forURL: url, httpMethod: "GET")
+        let (request, session) = configuration(forURL: url, httpMethod: "GET")
         
-        conf.session.dataTask(with: conf.request) { (data, response, error) in
+        session.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
                 completion(ArrayResult.Error(error: error), nil)
@@ -82,9 +82,9 @@ final class RequestBuilder: RequestBuilderType {
                 let page = photos["page"] as? Int,
                 let pages = photos["pages"] as? Int,
                 let perPage = photos["perpage"] as? Int
-                else {
-                    completion(ArrayResult.Success(result: photo), nil)
-                    return
+            else {
+                completion(ArrayResult.Success(result: photo), nil)
+                return
             }
             let pagination = APIPagination(page: page, pages: pages, perPage: perPage)
             completion(ArrayResult.Success(result: photo), pagination)
