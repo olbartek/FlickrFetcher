@@ -37,7 +37,7 @@ class PhotoDownloader {
     
     // MARK: Download Operations
     
-    func startDownload(photo: Photo, forIndexPath indexPath: IndexPath) {
+    private func startDownload(photo: Photo, forIndexPath indexPath: IndexPath) {
         if let _ = downloadsInProgress[indexPath] { return }
         
         let photoDownloadOperation = PhotoDownload(photo: photo, realmManager: realmManager)
