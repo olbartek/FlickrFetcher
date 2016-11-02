@@ -12,11 +12,14 @@ class PhotosViewController: UIViewController {
     
     // MARK: Constants
     
-    fileprivate lazy var cellSize: CGSize = {
-        let offset: CGFloat = 5.0
-        let cellWidth = UIScreen.main.bounds.size.width / 2 - offset
-        return CGSize(width: cellWidth, height: cellWidth)
-    }()
+    fileprivate struct Constants {
+        static var CellSize: CGSize = {
+            let offset: CGFloat = 5.0
+            let cellWidth = UIScreen.main.bounds.size.width / 2 - offset
+            return CGSize(width: cellWidth, height: cellWidth)
+        }()
+        static let NextPageOffset = 1
+    }
     
     // MARK: Properties
     
@@ -42,8 +45,8 @@ class PhotosViewController: UIViewController {
             photoDownloader.set(photos: self.photos)
         }
     }
-    var currentTextToSearch = ""
-    var currentPageToFetch = 1
+    var currentTagToSearch = ""
+    var currentPageToFetch = Constants.NextPageOffset
     var totalNumberOfPages = Int.max
     
     // MARK: VC's Lifecycle
@@ -54,8 +57,8 @@ class PhotosViewController: UIViewController {
     
     // MARK: Photos Searching
     
-    func searchPhotos(withText text: String) {
-        apiManager.fetchPhotos(withTag: text.stringTag, pageNumber: currentPageToFetch) { [weak self] result in
+    func searchPhotos(withTag tag: String) {
+        apiManager.fetchPhotos(withTag: tag, pageNumber: currentPageToFetch) { [weak self] result in
             guard let `self` = self else { return }
             switch result.0 {
             case .Error(error: let error):
@@ -77,7 +80,6 @@ class PhotosViewController: UIViewController {
             }
         }
     }
-
 }
 
 extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -105,20 +107,30 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return cellSize
+        return Constants.CellSize
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard (indexPath.row + Constants.NextPageOffset) >= photos.count else { return }
+        searchPhotos(withTag: currentTagToSearch)
     }
 }
 
 extension PhotosViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+    }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
         guard let text = searchBar.text else { return }
-        currentTextToSearch = text
+        let tag = text.stringTag
+        guard tag.characters.count > 0 else { return }
+        currentTagToSearch = tag
         currentPageToFetch = 1
         totalNumberOfPages = Int.max
         self.photos.removeAll()
-        searchPhotos(withText: text)
+        searchPhotos(withTag: tag)
         
-        view.endEditing(true)
         spinner.startAnimating()
     }
 }
@@ -136,10 +148,5 @@ extension PhotosViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         photoDownloader.loadPhotosForOnscreenCells()
         photoDownloader.resumeAllOperations()
-        
-        let bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height
-        if (bottomEdge >= self.collectionView.collectionViewLayout.collectionViewContentSize.height) {
-            searchPhotos(withText: currentTextToSearch)
-        }
     }
 }
