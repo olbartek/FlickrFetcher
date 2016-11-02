@@ -42,23 +42,31 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="eUm-Mr-kef"/>
                                 </connections>
                             </collectionView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Results." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oDb-Id-9go">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3wJ-Xf-TQ6"/>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="e6z-Wp-Bco" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="8Hf-qC-LDd"/>
+                            <constraint firstItem="oDb-Id-9go" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AKW-2F-JP0"/>
                             <constraint firstItem="LDj-Zw-1XL" firstAttribute="top" secondItem="e6z-Wp-Bco" secondAttribute="bottom" id="AhG-5I-Trm"/>
                             <constraint firstItem="3wJ-Xf-TQ6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="CUa-T9-41v"/>
                             <constraint firstItem="e6z-Wp-Bco" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EHa-GV-4Sp"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="LDj-Zw-1XL" secondAttribute="bottom" id="Jq5-ER-BPC"/>
                             <constraint firstItem="3wJ-Xf-TQ6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="X6L-x5-4Fq"/>
                             <constraint firstAttribute="trailing" secondItem="e6z-Wp-Bco" secondAttribute="trailing" id="g70-uP-BGT"/>
+                            <constraint firstItem="oDb-Id-9go" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ltN-da-bwP"/>
                             <constraint firstAttribute="trailing" secondItem="LDj-Zw-1XL" secondAttribute="trailing" id="nra-NL-2nQ"/>
                             <constraint firstItem="LDj-Zw-1XL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="tfK-j4-0FM"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="LDj-Zw-1XL" id="GKs-kH-Axg"/>
+                        <outlet property="noResultsLabel" destination="oDb-Id-9go" id="PbD-2Q-Uqi"/>
                         <outlet property="searchBar" destination="e6z-Wp-Bco" id="mCL-Nj-oOh"/>
                         <outlet property="spinner" destination="3wJ-Xf-TQ6" id="OJV-Qs-xb2"/>
                     </connections>

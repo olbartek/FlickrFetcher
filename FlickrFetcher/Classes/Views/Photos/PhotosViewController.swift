@@ -30,6 +30,7 @@ class PhotosViewController: UIViewController {
     }
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var noResultsLabel: UILabel!
     
     var apiManager: APIManagerType {
         let urlBuilder = URLBuilder()
@@ -68,6 +69,7 @@ class PhotosViewController: UIViewController {
                 self.photos.append(contentsOf: photos)
                 DispatchQueue.main.async {
                     self.spinner.stopAnimating()
+                    self.noResultsLabel.isHidden = self.photos.count > 0
                     self.collectionView.reloadData()
                 }
             }
@@ -137,6 +139,7 @@ extension PhotosViewController: UISearchBarDelegate {
         self.photos.removeAll()
         searchPhotos(withTag: tag)
         
+        noResultsLabel.isHidden = true
         spinner.startAnimating()
     }
 }
