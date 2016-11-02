@@ -67,7 +67,8 @@ class PhotosViewController: UIViewController {
             case .Success(result: let apiPhotos):
                 let photos = apiPhotos.map { Photo(url: $0.standardPhotoUrl) }
                 self.photos.append(contentsOf: photos)
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
+                    guard let `self` = self else { return }
                     self.spinner.stopAnimating()
                     self.noResultsLabel.isHidden = self.photos.count > 0
                     self.collectionView.reloadData()

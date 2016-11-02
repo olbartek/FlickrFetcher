@@ -48,7 +48,8 @@ class PhotoDownloader {
             DispatchQueue.main.async { [weak self] in
                 guard let `self` = self else { return }
                 self.downloadsInProgress.removeValue(forKey: indexPath)
-                self.collectionView?.performBatchUpdates({
+                self.collectionView?.performBatchUpdates({ [weak self] in
+                    guard let `self` = self else { return }
                     self.collectionView?.reloadItems(at: [indexPath])
                 })
             }

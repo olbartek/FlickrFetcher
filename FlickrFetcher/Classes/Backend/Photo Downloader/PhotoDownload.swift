@@ -10,7 +10,7 @@ import UIKit
 
 class PhotoDownload: Operation {
     
-    fileprivate var photo: Photo
+    fileprivate weak var photo: Photo?
     fileprivate let realmManager: RealmManagerType
     
     init(photo: Photo, realmManager: RealmManagerType) {
@@ -20,6 +20,7 @@ class PhotoDownload: Operation {
     
     override func main() {
         if isCancelled { return }
+        guard let photo = photo else { return }
         
         var imageData: Data?
         
