@@ -116,6 +116,10 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         photoDownloader.cancelOperation(atIndexPath: indexPath)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        view.endEditing(true)
+    }
 }
 
 extension PhotosViewController: UISearchBarDelegate {
@@ -134,19 +138,5 @@ extension PhotosViewController: UISearchBarDelegate {
         searchPhotos(withTag: tag)
         
         spinner.startAnimating()
-    }
-}
-
-extension PhotosViewController: UIScrollViewDelegate {
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        photoDownloader.suspendAllOperations()
-    }
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
-            photoDownloader.resumeAllOperations()
-        }
-    }
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        photoDownloader.resumeAllOperations()
     }
 }
