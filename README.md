@@ -12,4 +12,4 @@ An application that fetches photos from Flickr based on a given tag.
 
 ## Presentation
 
-![alt tag](https://raw.githubusercontent.com/olbartek/FlickrFetcher/master/)
+![alt tag](https://raw.githubusercontent.com/olbartek/FlickrFetcher/master/flickrfetcher.gif)
