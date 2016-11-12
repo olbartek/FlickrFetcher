@@ -12,10 +12,6 @@
 		4E1A42681DC8BB1600DB1A98 /* URLDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A42671DC8BB1600DB1A98 /* URLDisplayable.swift */; };
 		4E1A426A1DC91A8500DB1A98 /* String+Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A42691DC91A8500DB1A98 /* String+Tag.swift */; };
 		4E1A426C1DC91EF200DB1A98 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A426B1DC91EF200DB1A98 /* APIError.swift */; };
-		4E1A426F1DC9397E00DB1A98 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1A426D1DC9397E00DB1A98 /* Realm.framework */; };
-		4E1A42701DC9397E00DB1A98 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1A426D1DC9397E00DB1A98 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4E1A42711DC9397E00DB1A98 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1A426E1DC9397E00DB1A98 /* RealmSwift.framework */; };
-		4E1A42721DC9397E00DB1A98 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1A426E1DC9397E00DB1A98 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4E1A42791DC9406E00DB1A98 /* ManagedPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A42781DC9406E00DB1A98 /* ManagedPhoto.swift */; };
 		4E1A427B1DC9423D00DB1A98 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A427A1DC9423D00DB1A98 /* RealmManager.swift */; };
 		4E1A427F1DC9426F00DB1A98 /* RealmManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1A427E1DC9426F00DB1A98 /* RealmManagerType.swift */; };
@@ -42,6 +38,7 @@
 		4E30AC5B1DC7B85C005CD240 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E30AC591DC7B85B005CD240 /* PhotoCollectionViewCell.swift */; };
 		4E30AC5C1DC7B85C005CD240 /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E30AC5A1DC7B85C005CD240 /* PhotoCollectionViewCell.xib */; };
 		4E30AC5E1DC7C0BF005CD240 /* CALayer+ProxyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E30AC5D1DC7C0BF005CD240 /* CALayer+ProxyColor.swift */; };
+		510718031922068E9DF28A1F /* Pods_FlickrFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29A4D5F26A1498F5D28E6E38 /* Pods_FlickrFetcher.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,8 +48,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4E1A42721DC9397E00DB1A98 /* RealmSwift.framework in Embed Frameworks */,
-				4E1A42701DC9397E00DB1A98 /* Realm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -60,13 +55,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		01C01353077D1F46EC3CD67D /* Pods-FlickrFetcher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrFetcher.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickrFetcher/Pods-FlickrFetcher.debug.xcconfig"; sourceTree = "<group>"; };
+		29A4D5F26A1498F5D28E6E38 /* Pods_FlickrFetcher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickrFetcher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E1A42601DC8B40800DB1A98 /* PhotoDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoDownload.swift; path = "Photo Downloader/PhotoDownload.swift"; sourceTree = "<group>"; };
 		4E1A42651DC8BA4A00DB1A98 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Photo.swift; path = Models/Photo.swift; sourceTree = "<group>"; };
 		4E1A42671DC8BB1600DB1A98 /* URLDisplayable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLDisplayable.swift; sourceTree = "<group>"; };
 		4E1A42691DC91A8500DB1A98 /* String+Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Tag.swift"; sourceTree = "<group>"; };
 		4E1A426B1DC91EF200DB1A98 /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
-		4E1A426D1DC9397E00DB1A98 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
-		4E1A426E1DC9397E00DB1A98 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		4E1A42781DC9406E00DB1A98 /* ManagedPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManagedPhoto.swift; path = "Realm Manager/Entities/ManagedPhoto.swift"; sourceTree = "<group>"; };
 		4E1A427A1DC9423D00DB1A98 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmManager.swift; path = "Realm Manager/Implementations/RealmManager.swift"; sourceTree = "<group>"; };
 		4E1A427E1DC9426F00DB1A98 /* RealmManagerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmManagerType.swift; path = "Realm Manager/Protocols/RealmManagerType.swift"; sourceTree = "<group>"; };
@@ -95,6 +90,7 @@
 		4E30AC591DC7B85B005CD240 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoCollectionViewCell.swift; path = Views/Photos/PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		4E30AC5A1DC7B85C005CD240 /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoCollectionViewCell.xib; path = Views/Photos/PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		4E30AC5D1DC7C0BF005CD240 /* CALayer+ProxyColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+ProxyColor.swift"; sourceTree = "<group>"; };
+		9730BB4ECD5E8AA463E73DED /* Pods-FlickrFetcher.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrFetcher.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickrFetcher/Pods-FlickrFetcher.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,14 +98,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E1A42711DC9397E00DB1A98 /* RealmSwift.framework in Frameworks */,
-				4E1A426F1DC9397E00DB1A98 /* Realm.framework in Frameworks */,
+				510718031922068E9DF28A1F /* Pods_FlickrFetcher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20B83DB660FDE744E6754D8C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				01C01353077D1F46EC3CD67D /* Pods-FlickrFetcher.debug.xcconfig */,
+				9730BB4ECD5E8AA463E73DED /* Pods-FlickrFetcher.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		4E1A425D1DC8B24900DB1A98 /* Photo Downloader */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,10 +187,10 @@
 		4E30ABE41DC74885005CD240 = {
 			isa = PBXGroup;
 			children = (
-				4E1A426D1DC9397E00DB1A98 /* Realm.framework */,
-				4E1A426E1DC9397E00DB1A98 /* RealmSwift.framework */,
 				4E30ABEF1DC74885005CD240 /* FlickrFetcher */,
 				4E30ABEE1DC74885005CD240 /* Products */,
+				20B83DB660FDE744E6754D8C /* Pods */,
+				C9B46537F1B89CBF57DF3297 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -329,6 +333,14 @@
 			name = Photos;
 			sourceTree = "<group>";
 		};
+		C9B46537F1B89CBF57DF3297 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29A4D5F26A1498F5D28E6E38 /* Pods_FlickrFetcher.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -336,10 +348,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4E30ABFF1DC74885005CD240 /* Build configuration list for PBXNativeTarget "FlickrFetcher" */;
 			buildPhases = (
+				3D6B80F52721F6FBFC31135F /* [CP] Check Pods Manifest.lock */,
 				4E30ABE91DC74885005CD240 /* Sources */,
 				4E30ABEA1DC74885005CD240 /* Frameworks */,
 				4E30ABEB1DC74885005CD240 /* Resources */,
 				4E1A42731DC9397E00DB1A98 /* Embed Frameworks */,
+				6E6477842C4819FCA4465885 /* [CP] Embed Pods Frameworks */,
+				80BCDF6B0EC2E97AD2BFFA9B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -398,6 +413,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3D6B80F52721F6FBFC31135F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6E6477842C4819FCA4465885 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlickrFetcher/Pods-FlickrFetcher-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		80BCDF6B0EC2E97AD2BFFA9B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlickrFetcher/Pods-FlickrFetcher-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4E30ABE91DC74885005CD240 /* Sources */ = {
@@ -549,6 +612,7 @@
 		};
 		4E30AC001DC74885005CD240 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01C01353077D1F46EC3CD67D /* Pods-FlickrFetcher.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = RV9KDGVAV4;
@@ -566,6 +630,7 @@
 		};
 		4E30AC011DC74885005CD240 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9730BB4ECD5E8AA463E73DED /* Pods-FlickrFetcher.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = RV9KDGVAV4;
