@@ -6,7 +6,6 @@ An application that fetches photos from Flickr based on a given tag.
 - Protocol Oriented Programming (POP)
 - Dependecy injection
 - API Pagination
-
 - OperationQueue (used for cancelling operations when needed)
 - Realm (used for caching)
 
