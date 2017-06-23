@@ -62,9 +62,9 @@ class PhotosViewController: UIViewController {
         apiManager.fetchPhotos(withTag: tag, pageNumber: currentPageToFetch) { [weak self] result in
             guard let `self` = self else { return }
             switch result.0 {
-            case .Error(error: let error):
+            case .error(let error):
                 print(error)
-            case .Success(result: let apiPhotos):
+            case .success(let apiPhotos):
                 let photos = apiPhotos.map { Photo(url: $0.standardPhotoUrl) }
                 self.photos.append(contentsOf: photos)
                 DispatchQueue.main.async { [weak self] in

@@ -27,11 +27,11 @@ final class APIManager: APIManagerType {
     func fetchPhotos(withTag tag: String, pageNumber: Int, completion: @escaping PaginationResultBlock<[APIPhoto]>) {
         requestBuilder.GETRequest(withURL: urlBuilder.photosSearchUrl(withTag: tag, pageNumber: pageNumber)) { (result: Result<[[String : Any]]>, pagination: APIPagination?) in
             switch result {
-            case .Error(error: let error):
-                completion(Result.Error(error: error), pagination)
-            case .Success(result: let photosResult):
+            case .error(let error):
+                completion(Result.error(error), pagination)
+            case .success(result: let photosResult):
                 let photos = photosResult.flatMap { APIPhoto(json: $0) }
-                completion(Result.Success(result: photos), pagination)
+                completion(Result.success(photos), pagination)
             }
         }
     }

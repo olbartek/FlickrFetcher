@@ -9,9 +9,9 @@
 import Foundation
 
 enum Result<T> {
-    case Error(error : Error)
-    case Success(result : T)
+    case success(T)
+    case error(Error)
 }
 
-typealias ResultBlock<T>        = (Result<T>) -> ()
-typealias PaginationResultBlock<T>        = (Result<T>, APIPagination?) -> ()
+typealias ResultBlock<T>            = (Result<T>) -> ()
+typealias PaginationResultBlock<T>  = (Result<T>, APIPagination?) -> ()

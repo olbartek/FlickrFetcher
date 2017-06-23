@@ -18,15 +18,15 @@ final class RequestBuilder: RequestBuilderType {
         session.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
-                completion(Result.Error(error: error), nil)
+                completion(Result.error(error), nil)
                 return
             }
             guard let data = data, let httpResponse = response as? HTTPURLResponse else {
-                completion(Result.Error(error: APIError.noData), nil)
+                completion(Result.error(APIError.noData), nil)
                 return
             }
             guard httpResponse.statusCode == 200 else {
-                completion(Result.Error(error: APIError.wrongHttpCode(code: httpResponse.statusCode)), nil)
+                completion(Result.error(APIError.wrongHttpCode(code: httpResponse.statusCode)), nil)
                 return
             }
             
@@ -35,7 +35,7 @@ final class RequestBuilder: RequestBuilderType {
                 let photos = jsonResponse?["photos"] as? [String: Any],
                 let photo = photos["photo"] as? [String: Any]
             else {
-                completion(Result.Error(error: APIError.jsonSerializationFailed), nil)
+                completion(Result.error(APIError.jsonSerializationFailed), nil)
                 return
             }
             guard
@@ -43,11 +43,11 @@ final class RequestBuilder: RequestBuilderType {
                 let pages = photos["pages"] as? Int,
                 let perPage = photos["perpage"] as? Int
             else {
-                completion(Result.Success(result: photo), nil)
+                completion(Result.success(photo), nil)
                 return
             }
             let pagination = APIPagination(page: page, pages: pages, perPage: perPage)
-            completion(Result.Success(result: photo), pagination)
+            completion(Result.success(photo), pagination)
             
         }.resume()
     }
@@ -58,15 +58,15 @@ final class RequestBuilder: RequestBuilderType {
         session.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
-                completion(Result.Error(error: error), nil)
+                completion(Result.error(error), nil)
                 return
             }
             guard let data = data, let httpResponse = response as? HTTPURLResponse else {
-                completion(Result.Error(error: APIError.noData), nil)
+                completion(Result.error(APIError.noData), nil)
                 return
             }
             guard httpResponse.statusCode == 200 else {
-                completion(Result.Error(error: APIError.wrongHttpCode(code: httpResponse.statusCode)), nil)
+                completion(Result.error(APIError.wrongHttpCode(code: httpResponse.statusCode)), nil)
                 return
             }
             
@@ -75,7 +75,7 @@ final class RequestBuilder: RequestBuilderType {
                 let photos = jsonResponse?["photos"] as? [String: Any],
                 let photo = photos["photo"] as? [[String: Any]]
                 else {
-                    completion(Result.Error(error: APIError.jsonSerializationFailed), nil)
+                    completion(Result.error(APIError.jsonSerializationFailed), nil)
                     return
             }
             guard
@@ -83,11 +83,11 @@ final class RequestBuilder: RequestBuilderType {
                 let pages = photos["pages"] as? Int,
                 let perPage = photos["perpage"] as? Int
             else {
-                completion(Result.Success(result: photo), nil)
+                completion(Result.success(photo), nil)
                 return
             }
             let pagination = APIPagination(page: page, pages: pages, perPage: perPage)
-            completion(Result.Success(result: photo), pagination)
+            completion(Result.success(photo), pagination)
             
             }.resume()
     }
