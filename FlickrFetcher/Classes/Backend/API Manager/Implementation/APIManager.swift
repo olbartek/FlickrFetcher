@@ -24,14 +24,14 @@ final class APIManager: APIManagerType {
     
     // MARK: API
     
-    func fetchPhotos(withTag tag: String, pageNumber: Int, completion: @escaping PaginationArrayResultBlock<APIPhoto>) {
-        requestBuilder.GETRequest(withURL: urlBuilder.photosSearchUrl(withTag: tag, pageNumber: pageNumber)) { (result: ArrayResult<[String : Any]>, pagination: APIPagination?) in
+    func fetchPhotos(withTag tag: String, pageNumber: Int, completion: @escaping PaginationResultBlock<[APIPhoto]>) {
+        requestBuilder.GETRequest(withURL: urlBuilder.photosSearchUrl(withTag: tag, pageNumber: pageNumber)) { (result: Result<[[String : Any]]>, pagination: APIPagination?) in
             switch result {
             case .Error(error: let error):
-                completion(ArrayResult.Error(error: error), pagination)
+                completion(Result.Error(error: error), pagination)
             case .Success(result: let photosResult):
                 let photos = photosResult.flatMap { APIPhoto(json: $0) }
-                completion(ArrayResult.Success(result: photos), pagination)
+                completion(Result.Success(result: photos), pagination)
             }
         }
     }

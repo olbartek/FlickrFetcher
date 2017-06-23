@@ -52,21 +52,21 @@ final class RequestBuilder: RequestBuilderType {
         }.resume()
     }
     
-    func GETRequest(withURL url: URL, completion: @escaping PaginationArrayResultBlock<[String: Any]>) {
+    func GETRequest(withURL url: URL, completion: @escaping PaginationResultBlock<[[String: Any]]>) {
         let (request, session) = configuration(forURL: url, httpMethod: "GET")
         
         session.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
-                completion(ArrayResult.Error(error: error), nil)
+                completion(Result.Error(error: error), nil)
                 return
             }
             guard let data = data, let httpResponse = response as? HTTPURLResponse else {
-                completion(ArrayResult.Error(error: APIError.noData), nil)
+                completion(Result.Error(error: APIError.noData), nil)
                 return
             }
             guard httpResponse.statusCode == 200 else {
-                completion(ArrayResult.Error(error: APIError.wrongHttpCode(code: httpResponse.statusCode)), nil)
+                completion(Result.Error(error: APIError.wrongHttpCode(code: httpResponse.statusCode)), nil)
                 return
             }
             
@@ -75,7 +75,7 @@ final class RequestBuilder: RequestBuilderType {
                 let photos = jsonResponse?["photos"] as? [String: Any],
                 let photo = photos["photo"] as? [[String: Any]]
                 else {
-                    completion(ArrayResult.Error(error: APIError.jsonSerializationFailed), nil)
+                    completion(Result.Error(error: APIError.jsonSerializationFailed), nil)
                     return
             }
             guard
@@ -83,11 +83,11 @@ final class RequestBuilder: RequestBuilderType {
                 let pages = photos["pages"] as? Int,
                 let perPage = photos["perpage"] as? Int
             else {
-                completion(ArrayResult.Success(result: photo), nil)
+                completion(Result.Success(result: photo), nil)
                 return
             }
             let pagination = APIPagination(page: page, pages: pages, perPage: perPage)
-            completion(ArrayResult.Success(result: photo), pagination)
+            completion(Result.Success(result: photo), pagination)
             
             }.resume()
     }

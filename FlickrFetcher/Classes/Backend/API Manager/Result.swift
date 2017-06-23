@@ -13,13 +13,5 @@ enum Result<T> {
     case Success(result : T)
 }
 
-enum ArrayResult<T> {
-    case Error(error : Error)
-    case Success(result : [T])
-}
-
 typealias ResultBlock<T>        = (Result<T>) -> ()
-typealias ArrayResultBlock<T>   = (ArrayResult<T>) -> ()
-
 typealias PaginationResultBlock<T>        = (Result<T>, APIPagination?) -> ()
-typealias PaginationArrayResultBlock<T>   = (ArrayResult<T>, APIPagination?) -> ()

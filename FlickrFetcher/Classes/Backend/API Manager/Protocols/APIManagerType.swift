@@ -10,5 +10,5 @@ import Foundation
 
 protocol APIManagerType: class {
     
-    func fetchPhotos(withTag tag: String, pageNumber: Int, completion: @escaping PaginationArrayResultBlock<APIPhoto>)
+    func fetchPhotos(withTag tag: String, pageNumber: Int, completion: @escaping PaginationResultBlock<[APIPhoto]>)
 }
